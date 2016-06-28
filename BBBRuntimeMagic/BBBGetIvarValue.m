@@ -18,9 +18,7 @@
         }
         
     }
-    
-    
-    
+
     free(vars);
     return NULL;
 }
