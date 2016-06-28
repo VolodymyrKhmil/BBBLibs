@@ -1,6 +1,7 @@
+
 #import <UIKit/UIKit.h>
 
-@interface BBBAutomaticalyResizedFontButton : UIButton
+@interface BBBAutoresizedFontLabel : UILabel
 
 @property (nonatomic) IBInspectable NSInteger horizontalMargin;
 @property (nonatomic) IBInspectable NSInteger verticalMargin;

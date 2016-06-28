@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BBBCustomPageControlView">
+            <connections>
+                <outlet property="nextButton" destination="r2h-KF-Lux" id="gnm-Wv-NPe"/>
+                <outlet property="previousButton" destination="8M5-rV-ZWQ" id="osk-Tg-DWG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="MAA-lr-rhp">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-rV-ZWQ" customClass="BBBButtonWithCustomFont">
+                    <rect key="frame" x="-5" y="440" width="172" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="8M5-rV-ZWQ" secondAttribute="height" multiplier="59:55" id="wfn-bP-8xE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Back" backgroundImage="NextFinal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="fontType" value="Calibri-Bold"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="wfn-bP-8xE"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    </variation>
+                    <connections>
+                        <action selector="previousPressed" destination="-1" eventType="touchUpInside" id="Vya-kK-K7b"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2h-KF-Lux" customClass="BBBButtonWithCustomFont">
+                    <rect key="frame" x="433" y="440" width="172" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="r2h-KF-Lux" secondAttribute="height" multiplier="59:55" id="J8g-Km-YQA"/>
+                        <constraint firstAttribute="width" secondItem="r2h-KF-Lux" secondAttribute="height" multiplier="16:15" id="NMo-tO-Irt"/>
+                        <constraint firstAttribute="width" secondItem="r2h-KF-Lux" secondAttribute="height" multiplier="3.9:3.4" id="wOn-kf-KbZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Next" backgroundImage="NextFinal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="fontType" value="Calibri-Bold"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="J8g-Km-YQA"/>
+                            <exclude reference="NMo-tO-Irt"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    </variation>
+                    <connections>
+                        <action selector="nextPressed" destination="-1" eventType="touchUpInside" id="Mrq-v0-o18"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="8M5-rV-ZWQ" firstAttribute="width" secondItem="MAA-lr-rhp" secondAttribute="width" multiplier="1:4.5" id="0W6-y7-uaj"/>
+                <constraint firstItem="r2h-KF-Lux" firstAttribute="width" secondItem="MAA-lr-rhp" secondAttribute="width" multiplier="1:4.5" id="2ar-9V-mYQ"/>
+                <constraint firstItem="8M5-rV-ZWQ" firstAttribute="height" secondItem="MAA-lr-rhp" secondAttribute="height" multiplier="1:4" id="7hq-oW-NE3"/>
+                <constraint firstItem="r2h-KF-Lux" firstAttribute="width" secondItem="8M5-rV-ZWQ" secondAttribute="width" id="8r0-we-qLa"/>
+                <constraint firstItem="r2h-KF-Lux" firstAttribute="width" secondItem="8M5-rV-ZWQ" secondAttribute="width" id="Cpk-Lj-9Tj"/>
+                <constraint firstAttribute="bottom" secondItem="r2h-KF-Lux" secondAttribute="bottom" constant="10" id="FpA-mJ-IN8"/>
+                <constraint firstItem="8M5-rV-ZWQ" firstAttribute="width" secondItem="MAA-lr-rhp" secondAttribute="width" multiplier="1:5.5" id="RHj-zh-y1Q"/>
+                <constraint firstItem="8M5-rV-ZWQ" firstAttribute="leading" secondItem="MAA-lr-rhp" secondAttribute="leading" constant="-5" id="ZTZ-fi-xIm">
+                    <variation key="heightClass=regular-widthClass=regular" constant="-10"/>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="r2h-KF-Lux" secondAttribute="trailing" constant="-5" id="a8L-Tc-N7c">
+                    <variation key="heightClass=regular-widthClass=regular" constant="-10"/>
+                </constraint>
+                <constraint firstItem="8M5-rV-ZWQ" firstAttribute="height" secondItem="r2h-KF-Lux" secondAttribute="height" id="sfm-1O-eXh"/>
+                <constraint firstItem="r2h-KF-Lux" firstAttribute="height" secondItem="MAA-lr-rhp" secondAttribute="height" multiplier="1:5" id="tHd-MO-HcK"/>
+                <constraint firstAttribute="bottom" secondItem="8M5-rV-ZWQ" secondAttribute="bottom" constant="10" id="xaE-Gf-mqu"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0W6-y7-uaj"/>
+                    <exclude reference="RHj-zh-y1Q"/>
+                    <exclude reference="2ar-9V-mYQ"/>
+                    <exclude reference="Cpk-Lj-9Tj"/>
+                    <exclude reference="tHd-MO-HcK"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="431" y="205"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="NextFinal" width="393" height="341"/>
+    </resources>
+</document>

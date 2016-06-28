@@ -1,5 +1,6 @@
 
 #import "BBBButtonWithCustomFont.h"
+#import "UIButton+BBBDevice.h"
 
 #import <Availability.h>
 #if !__has_feature(objc_arc)
@@ -11,8 +12,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.titleLabel.font = [UIFont fontWithName:self.fontType size:self.titleLabel.font.pointSize];
-    
+    UIFont *font = [UIFont fontWithName:self.fontType size:self.titleLabel.font.pointSize];
+    if (font != nil) {
+        self.titleLabel.font = font;
+    }
+    [self updateFontToDevice];
 }
 
 @end

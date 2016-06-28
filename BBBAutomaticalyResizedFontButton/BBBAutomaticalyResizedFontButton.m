@@ -13,17 +13,22 @@
     
     __block CGFloat largestFontSize = self.titleLabel.font.pointSize;
     
-    CGFloat (^neededWidth)(void) = ^CGFloat{
-        CGSize countedSize = [self.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:largestFontSize]}];
-        NSInteger devider = (self.frame.size.height - self.verticalMargin * 2) / countedSize.height;
-        CGFloat neededWidth = countedSize.width / ((devider > 1) ? devider : 1);
+    CGFloat (^neededWidth)(void) = ^CGFloat {
+        CGSize countedSize = [self.titleLabel.text sizeWithAttributes:@{NSFontAttributeName : [self.titleLabel.font fontWithSize:largestFontSize]}];
+        CGFloat neededWidth = countedSize.width;
         return neededWidth;
     };
+    CGFloat (^neededHeight)(void) = ^CGFloat {
+        CGSize countedSize = [self.titleLabel.text sizeWithAttributes:@{NSFontAttributeName : [self.titleLabel.font fontWithSize:largestFontSize]}];
+        CGFloat neededheight = countedSize.height;
+        return neededheight;
+    };
     
-    while (neededWidth() > self.frame.size.width - self.horizontalMargin * 2) {
+    while ((!self.notCheckHorizontaly && neededWidth() > self.frame.size.width - self.horizontalMargin * 2) ||
+           (!self.notCheckVericaly && neededHeight() > self.frame.size.height - self.verticalMargin * 2)) {
         largestFontSize--;
     }
-    self.titleLabel.font = [UIFont systemFontOfSize:largestFontSize];
+    self.titleLabel.font = [self.titleLabel.font fontWithSize:largestFontSize];
 }
 
 @end

@@ -7,7 +7,6 @@
 
 @interface BBBXIBView ()
 
-@property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) NSMutableArray *customConstraints;
 
 @end
@@ -24,11 +23,13 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
+- (instancetype)init {
+    self = [super init];
+    
+    if (self != nil) {
         [self commonInit];
     }
+    
     return self;
 }
 

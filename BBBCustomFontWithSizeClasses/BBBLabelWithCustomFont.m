@@ -1,5 +1,6 @@
 
 #import "BBBLabelWithCustomFont.h"
+#import "UILabel+(BBBDevices).h"
 
 #import <Availability.h>
 #if !__has_feature(objc_arc)
@@ -10,7 +11,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.font = [UIFont fontWithName:self.fontType size:self.font.pointSize];
+    UIFont *font = [UIFont fontWithName:self.fontType size:self.font.pointSize];
+    if (font != nil) {
+        self.font = font;
+    }
+    [self updateFontToDevice];
     
 }
 @end
