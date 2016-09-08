@@ -1,11 +1,3 @@
-//
-//  UIButton+BBBDevice.m
-//  Sqord
-//
-//  Created by volodymyrkhmil on 4/5/16.
-//  Copyright © 2016 Sqord. All rights reserved.
-//
-
 #import "UIButton+BBBDevice.h"
 #import "NSObject+associatedObject.h"
 

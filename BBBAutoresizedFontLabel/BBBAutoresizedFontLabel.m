@@ -1,11 +1,3 @@
-//
-//  BBBAutoresizedFontLabel.m
-//  Sqord
-//
-//  Created by volodymyrkhmil on 3/23/16.
-//  Copyright © 2016 Sqord. All rights reserved.
-//
-
 #import "BBBAutoresizedFontLabel.h"
 
 #import <Availability.h>

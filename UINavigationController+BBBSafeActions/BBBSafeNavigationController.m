@@ -1,11 +1,3 @@
-//
-//  BBBSafeNavigationController.m
-//  Sqord
-//
-//  Created by volodymyrkhmil on 9/5/16.
-//  Copyright © 2016 TechMagic. All rights reserved.
-//
-
 #import "BBBSafeNavigationController.h"
 #import <objc/runtime.h>
 

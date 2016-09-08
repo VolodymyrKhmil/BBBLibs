@@ -1,11 +1,3 @@
-//
-//  UILabel+(BBBDevices).m
-//  Sqord
-//
-//  Created by volodymyrkhmil on 4/5/16.
-//  Copyright © 2016 Sqord. All rights reserved.
-//
-
 #import "UILabel+(BBBDevices).h"
 #import "NSObject+associatedObject.h"
 

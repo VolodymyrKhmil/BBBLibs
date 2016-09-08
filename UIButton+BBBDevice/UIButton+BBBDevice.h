@@ -1,11 +1,3 @@
-//
-//  UIButton+BBBDevice.h
-//  Sqord
-//
-//  Created by volodymyrkhmil on 4/5/16.
-//  Copyright © 2016 Sqord. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import "NEUUnifiedLabel.h"
 

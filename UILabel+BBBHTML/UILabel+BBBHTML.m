@@ -1,11 +1,3 @@
-//
-//  UILabel+BBBHTML.m
-//  Sqord
-//
-//  Created by volodymyrkhmil on 8/26/16.
-//  Copyright © 2016 TechMagic. All rights reserved.
-//
-
 #import "UILabel+BBBHTML.h"
 #import <objc/runtime.h>
 
