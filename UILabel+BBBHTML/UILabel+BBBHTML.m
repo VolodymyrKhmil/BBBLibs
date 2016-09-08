@@ -4,7 +4,7 @@
 @implementation UILabel(BBBHTML)
 
 - (void)setBBB_htmlText:(NSString *)BBB_htmlText {
-    objc_setAssociatedObject(self, @selector(BBB_htmlText), BBB_htmlText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(BBB_htmlText), BBB_htmlText, OBJC_ASSOCIATION_COPY_NONATOMIC);
     
     NSError *error = nil;
     self.attributedText = [[NSAttributedString alloc]
