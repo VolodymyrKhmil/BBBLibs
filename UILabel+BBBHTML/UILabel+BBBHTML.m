@@ -1,6 +1,11 @@
 #import "UILabel+BBBHTML.h"
 #import <objc/runtime.h>
 
+#import <Availability.h>
+#if !__has_feature(objc_arc)
+#error This class requires automatic reference counting
+#endif
+
 @implementation UILabel(BBBHTML)
 
 - (void)setBBB_htmlText:(NSString *)BBB_htmlText {

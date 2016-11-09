@@ -1,10 +1,7 @@
-//
-//  BBBSafeNavigationController.m
-//  Sqord
-//
-//  Created by volodymyrkhmil on 9/5/16.
-//  Copyright © 2016 TechMagic. All rights reserved.
-//
+#import <Availability.h>
+#if !__has_feature(objc_arc)
+#error This class requires automatic reference counting
+#endif
 
 #import "BBBSafeNavigationController.h"
 #import <objc/runtime.h>

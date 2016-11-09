@@ -1,11 +1,3 @@
-//
-//  RawRepresentable+BBBCount.swift
-//  Sqord
-//
-//  Created by volodymyrkhmil on 9/15/16.
-//  Copyright © 2016 TechMagic. All rights reserved.
-//
-
 import Foundation
 
 extension RawRepresentable {
