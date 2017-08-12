@@ -1,12 +1,4 @@
-//
-//  SingleAccountLimitModel+Binding.swift
-//  TIDE
-//
-//  Created by volodymyrkhmil on 10/13/16.
-//  Copyright © 2016 Techmagic. All rights reserved.
-//
-
-import Foundation
+import UIKit
 
 protocol AccountLimitNameView {
     var name: String? { get set }
@@ -73,6 +65,14 @@ protocol AccountLimitBindible: BindableObject {
 
 extension AccountLimitBindible {
     
+    //MARK: Fasade
+    
+    func transform(limits: [Limit]) -> String? {
+        return limits.map { limit in
+            return limit.message
+            }.joinWithSeparator("\n")
+    }
+    
     //MARK: AccountLimitBindible
     
     var nameView: AccountLimitNameView! {
@@ -99,9 +99,7 @@ extension AccountLimitBindible {
                 nameView.name = accountLimit.name
             }
             if var limitTextView: AccountLimitTextView = self.limitTextView {
-                limitTextView.limitText = accountLimit.limits.map { limit in
-                    return limit.message
-                    }.joinWithSeparator("\n")
+                limitTextView.limitText = self.transform(limits: accountLimit.limits)
             }
         }
     }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BBBSlider">
+            <connections>
+                <outlet property="label" destination="fne-G5-bbo" id="aEL-vu-nJA"/>
+                <outlet property="labelLeadingConstraint" destination="O9e-CC-vb5" id="7U3-IH-kg9"/>
+                <outlet property="slider" destination="X0t-cD-Rkx" id="1Jf-Oc-dv0"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lqA-S7-908">
+            <rect key="frame" x="0.0" y="0.0" width="514" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="X0t-cD-Rkx">
+                    <rect key="frame" x="3" y="21" width="508" height="124"/>
+                    <color key="minimumTrackTintColor" red="0.51764705879999995" green="0.039215686270000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="sliderMoved" destination="-1" eventType="valueChanged" id="0i8-5v-nf3"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fne-G5-bbo">
+                    <rect key="frame" x="13" y="0.0" width="9" height="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                    <color key="textColor" red="0.51764705879999995" green="0.039215686270000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fne-G5-bbo" firstAttribute="top" secondItem="lqA-S7-908" secondAttribute="top" id="Fji-OS-LZU"/>
+                <constraint firstAttribute="bottom" secondItem="X0t-cD-Rkx" secondAttribute="bottom" id="Kb7-RG-zWw"/>
+                <constraint firstAttribute="trailing" secondItem="X0t-cD-Rkx" secondAttribute="trailing" constant="5" id="Nwq-mx-Rvu"/>
+                <constraint firstItem="fne-G5-bbo" firstAttribute="leading" secondItem="lqA-S7-908" secondAttribute="leading" constant="13" id="O9e-CC-vb5"/>
+                <constraint firstItem="X0t-cD-Rkx" firstAttribute="leading" secondItem="lqA-S7-908" secondAttribute="leading" constant="5" id="srf-Ta-VCu"/>
+                <constraint firstItem="X0t-cD-Rkx" firstAttribute="top" secondItem="fne-G5-bbo" secondAttribute="bottom" constant="3" id="vhA-4Y-340"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-76" y="-36"/>
+        </view>
+    </objects>
+</document>
