@@ -5,6 +5,7 @@
 
 #import "UITextField+BBBPattern.h"
 #import <objc/runtime.h>
+#import "NSString+BBBPattern.h"
 
 #pragma mark - API
 
@@ -29,10 +30,6 @@ static inline BOOL BBB_selector_belongsToProtocol(SEL selector, Protocol * proto
 
 @interface UITextField(BBBPrivate)
 
-+ (NSString *)BBB_text:(NSString*)text
-       withoutPatternt:(NSString *)pattern
-               inRange:(NSRange *)range;
-
 + (void)BBB_adaptTextField:(UITextField *)textField
               toExpression:(NSString *)expression;
 
@@ -40,13 +37,6 @@ static inline BOOL BBB_selector_belongsToProtocol(SEL selector, Protocol * proto
              forTextField:(UITextField *)textField
               changeBlock:(BBB_PatternTextFieldChangedBlock)block
                 withRange:(NSRange)range;
-
-+ (NSString *)BBB_normalizedText:(NSString*)text
-                  withExpression:(NSString*)expression;
-
-+ (NSString *)BBB_text:(NSString*)text
-          withPatternt:(NSString *)pattern
-             withRange:(NSRange *)range;
 
 - (BOOL)BBB_isValidForText:(NSString*)text;
 
@@ -155,67 +145,22 @@ static inline BOOL BBB_selector_belongsToProtocol(SEL selector, Protocol * proto
 
 @implementation UITextField(BBBPrivate)
 
-+ (NSString *)BBB_text:(NSString*)text
-       withoutPatternt:(NSString *)pattern
-               inRange:(NSRange *)range {
-    
-    if (pattern.length == 0) {
-        return text;
-    }
-    
-    NSMutableString *result = [NSMutableString new];
-    NSUInteger length       = 0;
-    NSUInteger location     = 0;
-    
-    for (NSInteger i = 0; i < MIN(pattern.length, text.length); ++i) {
-        unichar patternCh   = [pattern characterAtIndex:i];
-        unichar textCh      = [text characterAtIndex:i];
-        
-        if (patternCh == '#') {
-            [result appendString:[NSString stringWithCharacters:&textCh
-                                                         length:1]];
-        } else if (patternCh != textCh) {
-            [result appendString:[NSString stringWithCharacters:&textCh
-                                                         length:1]];
-        } else if (range != nil) {
-            
-            if (i < range->location) {
-                ++location;
-            } else if (i < range->location + range->length) {
-                ++length;
-            }
-            
-        }
-    }
-    
-    if (range != nil) {
-        
-        range->location -= location;
-        range->length   -= length;
-    }
-    
-    return result;
-}
-
 + (void)BBB_adaptTextField:(UITextField *)textField
               toExpression:(NSString *)expression {
     
     NSString *nonPattern;
     if (textField.BBB_pattern != nil) {
-        nonPattern = [UITextField BBB_text:textField.text
-                           withoutPatternt:textField.BBB_pattern
-                                   inRange:nil];
+        nonPattern = [textField.text BBB_textWithoutPatternt:textField.BBB_pattern
+                                                     inRange:nil];
     } else {
         nonPattern = textField.text;
     }
     
-    NSString *text = [UITextField BBB_normalizedText:nonPattern
-                                      withExpression:expression];
+    NSString *text = [nonPattern BBB_normalizedTextWithExpression:expression];
     
     if (textField.BBB_pattern != nil) {
-        text = [UITextField BBB_text:text
-                        withPatternt:textField.BBB_pattern
-                           withRange:nil];
+        text = [text BBB_textWithPatternt:textField.BBB_pattern
+                                withRange:nil];
     }
     
     if (![textField.text isEqualToString:text]) {
@@ -244,9 +189,8 @@ static inline BOOL BBB_selector_belongsToProtocol(SEL selector, Protocol * proto
     
     if (textField.BBB_pattern.length != 0) {
         
-        NSString *pattern = [UITextField BBB_text:text
-                                     withPatternt:textField.BBB_pattern
-                                        withRange:&range];
+        NSString *pattern = [text BBB_textWithPatternt:textField.BBB_pattern
+                                             withRange:&range];
         
         if (![textField.text isEqualToString: pattern]) {
             
@@ -264,68 +208,6 @@ static inline BOOL BBB_selector_belongsToProtocol(SEL selector, Protocol * proto
             block(textField);
         }
     }
-}
-
-+ (NSString *)BBB_normalizedText:(NSString*)text
-                  withExpression:(NSString*)expression {
-    
-    if (0 == expression.length) {
-        return text;
-    }
-    
-    NSMutableString *mutable = [text mutableCopy];
-    for(int index = 0; index < mutable.length; ++index) {
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"SELF MATCHES %@", expression];
-        
-        while (mutable.length > 0) {
-            
-            if ([predicate evaluateWithObject: mutable]){
-                return mutable;
-            }
-            [mutable deleteCharactersInRange: NSMakeRange(mutable.length - 1, 1)];
-        }
-    }
-    
-    return @"";
-}
-
-+ (NSString *)BBB_text:(NSString*)text
-          withPatternt:(NSString *)pattern
-             withRange:(NSRange *)range {
-    
-    NSMutableString *result = [NSMutableString new];
-    
-    NSUInteger length   = 0;
-    NSUInteger location = 0;
-    
-    for (NSInteger i = 0, j = 0; i < pattern.length && j < text.length; ++i) {
-        
-        unichar patternCh   = [pattern characterAtIndex:i];
-        unichar textCh      = [text characterAtIndex:j];
-        
-        if (patternCh == '#') {
-            
-            [result appendString:[NSString stringWithCharacters:&textCh
-                                                         length:1]];
-            ++j;
-        } else {
-            
-            [result appendString:[NSString stringWithCharacters:&patternCh
-                                                         length:1]];
-            if (j < range->location) {
-                ++location;
-            }
-        }
-    }
-    
-    if (range != nil) {
-        
-        range->length   += length;
-        range->location += location;
-    }
-    
-    return result;
 }
 
 - (BOOL)BBB_isValidForText:(NSString*)text {
@@ -380,9 +262,8 @@ static inline BOOL BBB_selector_belongsToProtocol(SEL selector, Protocol * proto
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string {
     
-    NSString *text = [UITextField BBB_text:textField.text
-                           withoutPatternt:self.BBB_pattern
-                                   inRange:&range];
+    NSString *text = [textField.text BBB_textWithoutPatternt:self.BBB_pattern
+                                                     inRange:&range];
     NSString *final = [text stringByReplacingCharactersInRange:range
                                                     withString:string];
     
@@ -433,9 +314,8 @@ replacementString:(NSString *)string {
 - (void)setBBB_pattern:(NSString *)BBB_pattern {
     if (![BBB_pattern isEqualToString:self.BBB_pattern]) {
         
-        NSString *text = [UITextField BBB_text:self.text
-                               withoutPatternt:self.BBB_pattern
-                                       inRange:nil];
+        NSString *text = [self.text BBB_textWithoutPatternt:self.BBB_pattern
+                                                    inRange:nil];
         
         objc_setAssociatedObject(self,
                                  @selector(BBB_pattern),
@@ -484,9 +364,8 @@ replacementString:(NSString *)string {
 
 - (NSString *)BBB_nonPatternText {
     if (self.BBB_pattern != nil) {
-        return self.text == nil ? nil : [UITextField BBB_text:self.text
-                                              withoutPatternt:self.BBB_pattern
-                                                      inRange:nil];
+        return self.text == nil ? nil : [self.text BBB_textWithoutPatternt:self.BBB_pattern
+                                                                   inRange:nil];
     }
     
     return self.text;
